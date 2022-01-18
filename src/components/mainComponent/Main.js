@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MainBurger from '../BurgerBuilder/MainBurger/MainBurger';
 import Header from '../Header/Header';
 
 class Main extends Component {
@@ -6,6 +7,7 @@ class Main extends Component {
         return (
             <div>
                 <Header/>
+                <MainBurger/>
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, CardFooter, CardHeader } from "reactstrap";
+import { Button, Card, CardBody, CardFooter, CardHeader } from "reactstrap";
 
 const controls = [
   { label: "Salad", type: "salad" },
@@ -44,6 +44,7 @@ const BurgerControl = (props) => {
           {" "}
           <h4>  price <strong>{props.totalPrice}</strong> BDT</h4>{" "}
         </CardFooter>
+        <Button color="secondary">Order Now</Button>
       </Card>
     </div>
   );

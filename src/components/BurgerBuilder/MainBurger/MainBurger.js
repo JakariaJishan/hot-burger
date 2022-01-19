@@ -25,6 +25,7 @@ export default class MainBurger extends Component {
         item.amount++;
       }
     }
+
     this.setState({
       ingradients: ingredient,
       totalPrice: newPrice,
@@ -32,15 +33,18 @@ export default class MainBurger extends Component {
   };
   removeIngredientHandle = (type) => {
     const ingredient = [...this.state.ingradients];
-    console.log(INGREDIENT_PRICES[type])
+    // console.log(INGREDIENT_PRICES[type])
+    // console.log(type)
     let newPrice = this.state.totalPrice - INGREDIENT_PRICES[type];
-    console.log(newPrice)
+    // console.log(newPrice)
     for (const item of ingredient) {
       if (item.type === type) {
         if (item.amount <= 0) return;
         item.amount--;
       }
     }
+    // console.log(newPrice);
+
     this.setState({
       ingradients: ingredient,
       totalPrice: newPrice,
@@ -48,13 +52,16 @@ export default class MainBurger extends Component {
   };
   render() {
     return (
-      <div className="container ">
-        <Burger ingradients={this.state.ingradients} />
-        <BurgerControl
-          addIngredientHandle={this.addIngredientHandle}
-          removeIngredientHandle={this.removeIngredientHandle}
-          totalPrice={this.state.totalPrice}
-        />
+      <div style={{ textAlign: "center" }}>
+        <div className="container ">
+          <Burger ingradients={this.state.ingradients} />
+          <BurgerControl
+            addIngredientHandle={this.addIngredientHandle}
+            removeIngredientHandle={this.removeIngredientHandle}
+            totalPrice={this.state.totalPrice}
+          />
+        </div>
+        
       </div>
     );
   }

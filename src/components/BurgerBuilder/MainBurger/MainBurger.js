@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import BurgerControl from "../../BurgerControl/BurgerControl";
 import Burger from "../Burger/Burger";
-import OrderSummary from "../OrderSummary/OrderSummary";
+import OrderSummary from "../OrderSummary/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 20,
   cheese: 40,
   meet: 80,
 };
+
+
 
 export default class MainBurger extends Component {
   state = {
@@ -23,7 +26,6 @@ export default class MainBurger extends Component {
   };
 
   handlePurchaseAble = ingradients => {
-    console.log(ingradients);
     const sum = ingradients.reduce((sum, elem) => {
       return sum+elem.amount;
     }, 0)
@@ -73,6 +75,8 @@ export default class MainBurger extends Component {
       modalOpen: !this.state.modalOpen
     })
   }
+ 
+ 
   render() {
     return (
       <div style={{ textAlign: "center" }}>
@@ -95,7 +99,7 @@ export default class MainBurger extends Component {
               <OrderSummary ingradients={this.state.ingradients}/>
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.toggoleModal}>Contine Checkout</Button>
+              <Link to={'/checkout'} >Contine to Checkout</Link>
               <Button onClick={this.toggoleModal}>Cancel</Button>
             </ModalFooter>
           </Modal>

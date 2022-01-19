@@ -1,5 +1,6 @@
 import React from "react";
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarText } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Collapse, Nav, Navbar, NavbarBrand } from "reactstrap";
 import logo from "../../assets/images/logo.png";
 const Header = () => {
   return (
@@ -10,7 +11,9 @@ const Header = () => {
         </NavbarBrand>
         <Collapse navbar>
           <Nav className="me-auto" navbar></Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <Link to={'/'}>Home</Link>
+          <Link to={'/checkout'}>CheckOut</Link>
+          
         </Collapse>
       </Navbar>
     </div>

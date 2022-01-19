@@ -44,7 +44,7 @@ const BurgerControl = (props) => {
           {" "}
           <h4>  price <strong>{props.totalPrice}</strong> BDT</h4>{" "}
         </CardFooter>
-        <Button color="secondary">Order Now</Button>
+        <Button disabled={!props.purchaseAble} color="secondary" onClick={props.toggoleModal}>Order Now</Button>
       </Card>
     </div>
   );

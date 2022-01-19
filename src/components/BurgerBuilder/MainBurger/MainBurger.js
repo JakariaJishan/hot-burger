@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import BurgerControl from "../../BurgerControl/BurgerControl";
 import Burger from "../Burger/Burger";
+import OrderSummary from "../OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 20,
@@ -16,7 +18,19 @@ export default class MainBurger extends Component {
       { type: "meet", amount: 0 },
     ],
     totalPrice: 80,
+    modalOpen: false,
+    purchaseAble: false
   };
+
+  handlePurchaseAble = ingradients => {
+    console.log(ingradients);
+    const sum = ingradients.reduce((sum, elem) => {
+      return sum+elem.amount;
+    }, 0)
+    this.setState({
+      purchaseAble: sum>0
+    })
+  }
   addIngredientHandle = (type) => {
     const ingredient = [...this.state.ingradients];
     const newPrice = this.state.totalPrice + INGREDIENT_PRICES[type];
@@ -30,6 +44,7 @@ export default class MainBurger extends Component {
       ingradients: ingredient,
       totalPrice: newPrice,
     });
+    this.handlePurchaseAble(ingredient);
   };
   removeIngredientHandle = (type) => {
     const ingredient = [...this.state.ingradients];
@@ -49,7 +64,15 @@ export default class MainBurger extends Component {
       ingradients: ingredient,
       totalPrice: newPrice,
     });
+    this.handlePurchaseAble(ingredient);
+
   };
+
+  toggoleModal = () => {
+    return this.setState({
+      modalOpen: !this.state.modalOpen
+    })
+  }
   render() {
     return (
       <div style={{ textAlign: "center" }}>
@@ -59,9 +82,24 @@ export default class MainBurger extends Component {
             addIngredientHandle={this.addIngredientHandle}
             removeIngredientHandle={this.removeIngredientHandle}
             totalPrice={this.state.totalPrice}
+            toggoleModal={this.toggoleModal}
+            purchaseAble={this.state.purchaseAble}
           />
         </div>
-        
+        <div>
+         
+          <Modal isOpen={this.state.modalOpen}>
+            <ModalHeader>Your Order Summery</ModalHeader>
+            <ModalBody>
+              Total Price: {this.state.totalPrice.toFixed(0)} BDT
+              <OrderSummary ingradients={this.state.ingradients}/>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="success" onClick={this.toggoleModal}>Contine Checkout</Button>
+              <Button onClick={this.toggoleModal}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }
